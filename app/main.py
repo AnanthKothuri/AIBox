@@ -2,9 +2,7 @@ from fastapi import FastAPI
 from routers import researchGPT
 
 app = FastAPI()
-
-
-app.include_router(researchGPT)
+app.include_router(researchGPT.router)
 
 @app.get("/")
 async def root():

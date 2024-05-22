@@ -76,13 +76,13 @@ def ask_gpt(query, context):
         # max_tokens=400,  
         temperature=0.4,  
     )
-    print("Assistant's Response:")
-    print(response['choices'][0]['message']['content'])
+    # print("Assistant's Response:")
+    return response['choices'][0]['message']['content']
 
 def ask(query):
     papers = perform_similarity_search(query)
     context = reformat_papers(papers)
-    ask_gpt(query, context)
+    return ask_gpt(query, context)
 
 if __name__ == "__main__":
     query = input("Enter the query here, or q to quit: ")

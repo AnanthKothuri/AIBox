@@ -1,7 +1,6 @@
-from sqlalchemy import text
-from fastapi import APIRouter, HTTPException, Depends
-from dependencies import get_db
-from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import APIRouter, HTTPException
+import sys
+sys.path.insert(1, '../')
 from gpt import ask
 
 router = APIRouter(
