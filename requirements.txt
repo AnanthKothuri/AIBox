@@ -1,5 +1,7 @@
 arxiv
 openai
 supabase
-langchain
+langchain-community
 pypdf
+python-dotenv
+tiktoken

@@ -61,11 +61,11 @@ def add_paper_vector(data, filename):
     
 
 if __name__ == "__main__":
-    papers = search("artificial intelligence", max_results=1, downloadPath=DOWNLOAD_FILENAME)
+    papers = search("artificial intelligence", max_results=10, downloadPath=DOWNLOAD_FILENAME)
     for data in papers:
         if not supabase_contains_paper(data):
             add_paper_vector(data, filename=DOWNLOAD_FILENAME)
             add_paper_details(data)
-            print(f"added paper {data["title"]}")
+            print(f"added paper {data['title']}")
 
     print("successfully added all papers to the vector database")
