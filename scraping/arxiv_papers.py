@@ -1,17 +1,21 @@
 import arxiv
 
-client = arxiv.Client()
+client = arxiv.Client(
+  page_size = 50,
+  delay_seconds = 5.0,
+  num_retries = 5
+)
 TOTAL_RESULTS = 100_000  # subject to change, temporary for now
 date_format = "%Y-%m-%d %H:%M:%S"
 
-def search(query, max_results=TOTAL_RESULTS, id=None, cat=None, recent=True, download=True, downloadPath="paper.pdf"):
+def search(query, max_results=TOTAL_RESULTS, id=None, cat=None, recent=True, download=True, downloadPath="paper.pdf", start=0):
   search = arxiv.Search(
     query = f'{"id:" + id + " AND " if id else ""}{"cat:" + cat + " AND " if cat else ""}{query}',
     max_results = max_results,
     sort_by = arxiv.SortCriterion.SubmittedDate if recent else arxiv.SortCriterion.Relevance
   )
 
-  for r in client.results(search):
+  for r in client.results(search, offset=start):
     data = {}
     data['id'] = r.get_short_id()
     data['title'] = r.title if r.title else ""
@@ -25,8 +29,13 @@ def search(query, max_results=TOTAL_RESULTS, id=None, cat=None, recent=True, dow
     data['updated'] = r.updated.strftime(date_format) if r.updated else ""
     data['summary'] = r.summary if r.summary else ""
 
-    if download:
-      r.download_pdf(filename=downloadPath)
+    retry = 5
+    while download and retry > 0:
+      try:
+        r.download_pdf(filename=downloadPath)
+        break
+      except:
+        retry -= 1
 
     yield data
 

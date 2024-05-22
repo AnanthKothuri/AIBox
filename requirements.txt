@@ -5,3 +5,7 @@ langchain-community
 pypdf
 python-dotenv
 tiktoken
+fastapi
+sqlalchemy
+uvicorn
+asyncpg
