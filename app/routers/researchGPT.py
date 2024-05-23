@@ -17,3 +17,15 @@ async def askGPT(query):
     return result
   except Exception as e:
     raise HTTPException(status_code=404, detail="Error asking GPT")
+  
+  {
+    title: string,
+    sections: [
+      subtitle: string,
+      body: string
+    ],
+    papers: [
+      title: string,
+      link: string
+    ]
+  }
