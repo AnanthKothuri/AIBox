@@ -1,13 +1,13 @@
-import { useEffect, useState, useRef } from "react"
+import {useState } from "react"
 import Colors from "../assets/Colors";
-import {Row, Col} from 'react-bootstrap'
 import SamplePromptBox from "../components/SamplePromptBox";
-import ChatResponse from "./ChatResponse";
+import CustomSidebar from "../components/CustomSidebar";
+import FullChatList from "./ChatResponse";
 
 export default function ResearchRAGScreen() {
     const [dialogue, setDialogue] = useState([])
     const [query, setQuery] = useState("")
-    const [gptResponse, setGptResponse] = useState(null)
+    // const [gptResponse, setGptResponse] = useState(null)
     const [present, setPresent] = useState(false)
     const [error, setError] = useState("")
 
@@ -15,9 +15,15 @@ export default function ResearchRAGScreen() {
         if (event.key === 'Enter') {
           const q = event.target.value
           setQuery(q);
-          // setError("Asking GPT . . . ")
-          // askGPT(q)
-          setPresent(true)  // FOR TESTING OTHER PAGE
+          const d = {
+            type: 'user',
+            body: query
+          }
+          setDialogue([...dialogue, d])
+          setPresent(true)
+          setError("Asking GPT . . . ")
+          askGPT(q)
+          // setPresent(true)  // FOR TESTING OTHER PAGE
         }
       };
 
@@ -41,16 +47,23 @@ export default function ResearchRAGScreen() {
         const result = await response.json()
         try {
           const parsedJson = JSON.parse(result);
-          setGptResponse(parsedJson)
+          // setGptResponse(parsedJson)
           setError('');
-          setPresent(true)
+          const bot = {
+            type: 'bot',
+            body: parsedJson
+          }
+          setDialogue([...dialogue, bot])
         } catch (e) {
           setError('Error getting response: invalid JSON. Please try again.');
-          setGptResponse(null);
+          // setGptResponse(null);
         }
       }
 
     return (
+      <div style={{flexDirection: 'row', flex: 1, display: 'flex'}}>
+        <CustomSidebar dialogue={dialogue} />
+
       <div>
           {/* title */}
           {!present && (
@@ -64,7 +77,8 @@ export default function ResearchRAGScreen() {
           )}
 
           {present && (
-            <ChatResponse r={gptResponse} />
+            // <ChatResponse response={gptResponse} />
+            <FullChatList dialogue={dialogue} />
           )}
 
           {/* query bar */}
@@ -72,8 +86,9 @@ export default function ResearchRAGScreen() {
               <p style={{fontFamily: "Jaldi", fontSize: 12}}>{error}</p>
               <input type="text" placeholder="Query research papers . . . " value={query} onKeyUp={queryEntered} onChange={updateQuery}
                       style={{backgroundColor: Colors.light_pink, borderRadius: 25, height: 50, 
-                      borderWidth: 0, paddingLeft: 30, paddingRight: 30, width: '30%', maxWidth: '50%',
-                      color: Colors.black, fontSize: 18, fontFamily: "Jaldi"}}/>
+                      borderWidth: 0, paddingLeft: 30, paddingRight: 30, width: '50%', maxWidth: '50%',
+                      color: Colors.black, fontSize: 18, fontFamily: "Jaldi"}}
+                      disabled={error === "Asking GPT . . . "}/>
           </div>
 
           {!present && (
@@ -90,6 +105,7 @@ export default function ResearchRAGScreen() {
           )}
 
           <div style={{height: 30}}/>
+      </div>
       </div>
     )
 }

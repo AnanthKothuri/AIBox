@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ashwamegh/react-link-preview": "^1.0.0",
+    "@dhaiwat10/react-link-preview": "^1.15.0",
+    "@microlink/react": "^5.5.18",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -11,7 +14,10 @@
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18.3.1",
     "react-markdown": "^9.0.1",
+    "react-pdf": "^8.0.2",
+    "react-pro-sidebar": "^1.1.0",
     "react-scripts": "5.0.1",
+    "react-type-animation": "^3.2.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
