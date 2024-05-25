@@ -33,7 +33,6 @@ export default function ResearchRAGScreen() {
       }
 
       async function askGPT(queryString) {
-        setError(process.env.REACT_APP_API_URL)
         const apiUrl = process.env.REACT_APP_API_URL;
         const params = { query: queryString};
         const string = new URLSearchParams(params).toString();
@@ -50,7 +49,7 @@ export default function ResearchRAGScreen() {
         try {
           const parsedJson = JSON.parse(result);
           // setGptResponse(parsedJson)
-          setError('');
+          setError('Recieved response');
           const bot = {
             type: 'bot',
             body: parsedJson
