@@ -46,10 +46,10 @@ export default function ResearchRAGScreen() {
           throw new Error('Network response was had an error');
         }
         const result = await response.json()
+        setError('Recieved response');
         try {
           const parsedJson = JSON.parse(result);
           // setGptResponse(parsedJson)
-          setError('Recieved response');
           const bot = {
             type: 'bot',
             body: parsedJson
