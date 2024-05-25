@@ -43,6 +43,7 @@ export default function ResearchRAGScreen() {
     
         // Check if the response is successful
         if (!response.ok) {
+          setError(response.error)
           throw new Error('Network response was had an error');
         }
         const result = await response.json()
