@@ -33,6 +33,7 @@ export default function ResearchRAGScreen() {
       }
 
       async function askGPT(queryString) {
+        setError(process.env.REACT_APP_API_URL)
         const apiUrl = process.env.REACT_APP_API_URL;
         const params = { query: queryString};
         const string = new URLSearchParams(params).toString();
