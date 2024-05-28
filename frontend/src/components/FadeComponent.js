@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './FadeComponent.css'; // Import CSS file with transition styles
 
-
+// takes in fade, fadeOut, delay
 function FadeComponent(props) {
   const [isVisible, setIsVisible] = useState(props.fadeOut);
-  const [isMounted, setIsMounted] = useState(true);
 
   useEffect(() => {
     if (!props.fade) {return}
@@ -17,20 +16,9 @@ function FadeComponent(props) {
     return () => clearTimeout(timeoutId);
   }, [props.fade]);
 
-  const handleAnimationEnd = () => {
-    // If animation ends and component is not visible, unmount the component
-    if (!isVisible) {
-      setIsMounted(false);
-    }
-  };
-
   return (
-    <div className={`fade-in ${isVisible ? 'visible' : ''}`} onAnimationEnd={handleAnimationEnd}>
-      {isMounted  && (
-        <div>
-          {props.children}
-        </div>
-      )}
+    <div className={`fade-in ${isVisible ? 'visible' : ''}`}>
+        {props.children}
     </div>
   );
 }

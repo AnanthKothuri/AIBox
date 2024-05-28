@@ -5,15 +5,17 @@ import Microlink from "@microlink/react";
 import Colors from "../assets/Colors";
 import Card from 'react-bootstrap/Card';
 import PDFPage from "../components/PDFPage";
+import FadeComponent from "../components/FadeComponent";
 
 export default function FullChatList({dialogue}) {
   return (
     <div style={{ scrollbarWidth: 'none', overflowY: 'scroll', height: '70vh'}}>
       {dialogue.map((item, index) => (
           item.type === 'bot' ? (
-            <ChatResponse response={item.body} key={index}/>
+              <ChatResponse response={item.body} key={index}/>
           ) : (
-            <UserQuery query={item.body} key={index} />
+            // <UserQuery query={item.body} key={index} />
+            null
           )
       ))}
     </div>
@@ -83,24 +85,24 @@ function ChatResponse({ response }) {
     }}>
       {/* title */}
       <p style={{ fontFamily: 'Jaldi', fontSize: 22, textAlign: 'center' }}>{response.title}</p>
-      {/* <LinkPreview url='https://en.wikipedia.org/wiki/Dog' width='400px' /> */}
-      {/* <Microlink url="https://arxiv.org/pdf/2301.11325" /> */}
-      {/* <PDFPage link={"https://arxiv.org/pdf/2301.11325" } /> */}
 
       {/* sections */}
       {response.sections.map((section, index) => (
-        <div key={index} style={{ display: 'flex', flexDirection: 'row', marginBottom: '20px' }}>
-          {/* {mappings[index] !== null && index % 2 === 1 && mappings[index] < response.papers.length && (
-            <LinkPreview url='https://www.youtube.com/watch?v=dQw4w9WgXcQ' width='400px' />
-          )} */}
-          <div>
+        <div key={index} style={{ display: 'flex', flexDirection: 'row', marginBottom: 60, alignItems: 'center'}}>
 
+          {mappings[index] !== null && index % 2 === 1 && mappings[index] < response.papers.length && (
+            <PDFPage link={response.papers[mappings[index]].link}/>
+          )}
+
+          {/* text */}
+          <div>
             <p style={{ fontFamily: 'Jaldi-Bold', fontSize: 20 }}>{section.subtitle}</p>
             <p style={{ fontFamily: 'Jaldi', fontSize: 18 }}>{section.body}</p>
           </div>
-          {/* {mappings[index] !== null && index % 2 === 0 && mappings[index] < response.papers.length && (
-            <LinkPreview url='https://www.youtube.com/watch?v=dQw4w9WgXcQ' width='400px' />
-          )} */}
+
+          {mappings[index] !== null && index % 2 === 0 && mappings[index] < response.papers.length && (
+            <PDFPage link={response.papers[mappings[index]].link}/>
+          )}
         </div>
       ))}
 
@@ -110,7 +112,7 @@ function ChatResponse({ response }) {
 
       <div style={{flexDirection: 'row', display: 'flex', textAlign: 'left', margin: 'auto', justifyContent: 'center'}}>
         {response.papers.map((paper, index) => (
-          <Card style={{ width: '18rem', margin: 20 }}>
+          <Card style={{ width: '18rem', margin: 20 }} key={index}>
             {/* <Card.Img variant="top" src=""/> */}
             <Card.Body>
               <Card.Title style={{fontFamily: "Jaldi", fontSize: 15, color: Colors.dark_gray}}>Paper {index + 1}</Card.Title>

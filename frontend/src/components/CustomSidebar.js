@@ -33,7 +33,7 @@ export default function CustomSidebar({dialogue}) {
                         <SubMenu label={item.body.title} defaultOpen={true} key={index} style={{fontFamily: 'Jaldi', fontSize: 18}}>
                             {item.body.papers.map((paper, index) => (
                                 // <MenuItem  style={{fontFamily: "Jaldi", fontSize: 15}}>{paper.title}</MenuItem>
-                                <MenuItem component={<p style={{fontFamily: "Jaldi", fontSize: 15}} onClick={() => {openLink(paper.link)}} />}> {paper.title}</MenuItem>
+                                <MenuItem key={index} component={<p style={{fontFamily: "Jaldi", fontSize: 15}} onClick={() => {openLink(paper.link)}} />}> {paper.title}</MenuItem>
                             ))}
                         </SubMenu>
                     ) : null

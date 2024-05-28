@@ -6,6 +6,7 @@ import FullChatList from "./ChatResponse";
 import PuffLoader from "react-spinners/PuffLoader";
 import { FaPaperPlane } from "react-icons/fa";
 import FadeComponent from "../components/FadeComponent";
+import ResizeComponent from "../components/ResizeComponent";
 
 
 export default function ResearchRAGScreen() {
@@ -79,18 +80,20 @@ export default function ResearchRAGScreen() {
         <CustomSidebar dialogue={dialogue}/>
 
         <div style={{ position: 'relative', zIndex: 1 }}>
-            {/* title */}
-            {/* {!present && ( */}
-            <FadeComponent fade={present} fadeOut={true} delay={0}>
-              <div>
-                <div style={{ opacity: 1, paddingTop: '10%'}}>
-                    <p style={{fontFamily: 'Jaldi', fontSize: 60, margin: 0, padding: 0}}>ResearchRAG</p>
+
+            <ResizeComponent startResize={present} startH={'100%'} endH={0} delay={1}>
+              <FadeComponent fade={present} fadeOut={true} delay={1}>
+                <div>
+                  <div style={{ opacity: 1, paddingTop: '10%'}}>
+                      <p style={{fontFamily: 'Jaldi', fontSize: 60, margin: 0, padding: 0}}>ResearchRAG</p>
+                  </div>
+                  {/* line */}
+                  <div style={{height: 2, color: Colors.gray, backgroundColor: Colors.gray, width: '50%', margin: '0px auto 25px', opacity: 1}}></div>
                 </div>
-                {/* line */}
-                <div style={{height: 2, color: Colors.gray, backgroundColor: Colors.gray, width: '50%', margin: '0px auto 25px', opacity: 1}}></div>
-              </div>
-            </FadeComponent>
-            {/* )} */}
+              </FadeComponent>
+            </ResizeComponent>
+
+
             {present && (
               <FullChatList dialogue={dialogue} />
             )}
@@ -127,16 +130,19 @@ export default function ResearchRAGScreen() {
             </div>
 
             {!present && (
-              <div style={{ flexDirection: 'column', display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-                <p style={{fontFamily: "Jaldi", fontSize: 20, marginTop: 100}}>Sample Queries</p>
+            // <ResizeComponent startResize={present} startH={'100%'} endH={0} delay={2}>
+            //   <FadeComponent fade={present} fadeOut={true} delay={2}>
+                <div style={{ flexDirection: 'column', display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                  <p style={{fontFamily: "Jaldi", fontSize: 20, marginTop: 100}}>Sample Queries</p>
 
-                <div style={{flexDirection: 'row', flex: 1, display: 'flex', justifyContent: 'center'}}>
-                  <SamplePromptBox text={"Tell me about the latest research developments with LLMs in sports training . . ."}/>
-                  <div style={{width: 20}}/>
-                  <SamplePromptBox text={"I have an idea about _____. What research has already been done about this topic?"}/>
+                  <div style={{flexDirection: 'row', flex: 1, display: 'flex', justifyContent: 'center'}}>
+                    <SamplePromptBox text={"Tell me about the latest research developments with LLMs in sports training . . ."}/>
+                    <div style={{width: 20}}/>
+                    <SamplePromptBox text={"I have an idea about _____. What research has already been done about this topic?"}/>
+                  </div>
                 </div>
-
-              </div>
+            //   </FadeComponent>
+            // </ResizeComponent>
             )}
 
             <div style={{height: 30}}/>
