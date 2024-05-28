@@ -7,7 +7,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 export default function PDFPage({link}) {
   return ( 
     <div>
-      <Document className="pdf-document" file={link}>
+      <Document className="pdf-document" file={link.replace('http', 'https')}>
         <Page className="pdf-page" pageNumber={1} scale={1} width={400}/>
       </Document>
     </div>
