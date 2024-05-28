@@ -1,5 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import Colors from '../assets/Colors';
 import { useState } from 'react';
 import { FaChevronDown } from "react-icons/fa";
@@ -11,12 +13,14 @@ function DetailsBar() {
         <Container style={{flexDirection: 'row', display: 'flex', alignItems: 'center', marginLeft: 50, marginRight: 50}}>
 
           <div style={{flexDirection: 'row', display: 'flex', flexGrow: 1}}></div>
-          <div style={{color: Colors.black, flexDirection: 'row', display: 'flex'}}>
-            <Dropdown title={"Number of Papers"} items={["300"]} />
-            <Dropdown title={"Categories"} items={["AI"]} />
-            <Dropdown title={"Sources"} items={["arxiv.org"]} />
-            <Dropdown title={"Date Range"} items={["05-16-2024", "05-20-2024"]} />
-          </div>
+            <Navbar.Collapse id="basic-navbar-nav">
+            <div style={{color: Colors.black, flexDirection: 'row', display: 'flex'}}>
+              <Dropdown title={"Number of Papers"} items={["300"]} />
+              <Dropdown title={"Categories"} items={["AI"]} />
+              <Dropdown title={"Sources"} items={["arxiv.org"]} />
+              <Dropdown title={"Date Range"} items={["05-16-2024", "05-20-2024"]} />
+            </div>
+            </Navbar.Collapse>
         </Container>
       </Navbar>
     </>
