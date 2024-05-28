@@ -8,7 +8,7 @@ import PDFPage from "../components/PDFPage";
 
 export default function FullChatList({dialogue}) {
   return (
-    <div style={{ scrollbarWidth: 'none', overflowY: 'scroll', height: '80vh'}}>
+    <div style={{ scrollbarWidth: 'none', overflowY: 'scroll', height: '70vh'}}>
       {dialogue.map((item, index) => (
           item.type === 'bot' ? (
             <ChatResponse response={item.body} key={index}/>
