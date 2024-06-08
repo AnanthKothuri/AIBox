@@ -1,1 +1,1 @@
-# AIBox
+# ResearchRAG
